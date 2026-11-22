@@ -21,9 +21,14 @@ a{text-decoration:none;color:inherit}
 .btn-outline:hover{background:var(--white);color:var(--navy)}
 
 /* ===== الشريط العلوي + الواجهة ===== */
-.hero-top{background:linear-gradient(100deg,#08162E,var(--navy) 55%,var(--navy-2));
-  /* لو عندك صورة: background-image:linear-gradient(...),url('../images/hero.jpg'); */
-  color:var(--white);padding-bottom:110px}
+.hero-top {
+  background: linear-gradient(270deg, rgba(8, 22, 46, 0.88) 0%, rgba(11, 31, 63, 0.65) 55%, rgba(18, 48, 106, 0.35) 100%), url('../images/hero.jpg');
+  background-size: cover;
+  background-position: center 30%;
+  color: var(--white);
+  padding-bottom: 110px;
+}
+
 .navbar{display:flex;align-items:center;justify-content:space-between;gap:20px;
   padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12);flex-wrap:wrap}
 .logo{display:flex;align-items:center;gap:12px}
@@ -153,6 +158,11 @@ body{animation:pageIn .5s ease both}
 .card:hover,.client-list li:hover,.iso-card:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(11,31,63,.14)}
 
 /* لمن يفضّل تقليل الحركة في جهازه */
+@media (prefers-reduced-motion:reduce){
+  body{animation:none}
+  .reveal{opacity:1;transform:none;transition:none}
+  .card,.client-list li,.iso-card{transition:none}
+}
 @media (prefers-reduced-motion:reduce){
   body{animation:none}
   .reveal{opacity:1;transform:none;transition:none}
