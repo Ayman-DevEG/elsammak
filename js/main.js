@@ -107,8 +107,3 @@ if (sendEmailBtn && quoteForm) {
     window.location.href = `mailto:elsmmakforcontracting@gmail.com?subject=${subject}&body=${body}`;
   });
 }
-  '.hero > *, .stats, .services-title, .card, .clients h2, .client-list li, ' +
-  '.about-text, .about-numbers, .iso-section h2, .iso-card, .cta-band, .footer-grid > div, ' +
-  '.svc-card, .method h2, .step, .project-card, .certs h2, .cert-badge, ' +
-  '.info-card, .quote-box, .map-frame'
-);
