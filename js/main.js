@@ -8,11 +8,11 @@ menuBtn.addEventListener('click', () => {
 });
 
 // ===== أنيميشن الظهور عند النزول في الصفحة =====
-// العناصر اللي هتظهر بحركة بسيطة (ضيف أي كلاس هنا لو عاوز)
 const revealItems = document.querySelectorAll(
   '.hero > *, .stats, .services-title, .card, .clients h2, .client-list li, ' +
   '.about-text, .about-numbers, .iso-section h2, .iso-card, .cta-band, .footer-grid > div, ' +
-  '.svc-card, .method h2, .step, .project-card, .certs h2, .cert-badge'
+  '.svc-card, .method h2, .step, .project-card, .certs h2, .cert-badge, ' +
+  '.info-card, .quote-box, .map-frame'
 );
 
 // تأخير بسيط بين العناصر اللي جنب بعض (بحد أقصى)
@@ -27,18 +27,15 @@ if ('IntersectionObserver' in window) {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('show');
-        // بعد ما الحركة تخلص نشيل التأخير، عشان الـ hover ميتأخرش
         setTimeout(() => { entry.target.style.transitionDelay = '0ms'; }, 1200);
-        observer.unobserve(entry.target); // تظهر مرة واحدة بس
+        observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.15 });
   revealItems.forEach((el) => observer.observe(el));
 } else {
-  // متصفح قديم: اظهر كل حاجة من غير حركة
   revealItems.forEach((el) => el.classList.add('show'));
 }
-
 
 // ===== تصفية المشاريع (صفحة سابقة أعمالنا) =====
 const filterBtns = document.querySelectorAll('.filter-btn');
@@ -48,15 +45,13 @@ filterBtns.forEach((btn) => {
   btn.addEventListener('click', () => {
     const type = btn.dataset.filter;
 
-    // تلوين الزر المختار
     filterBtns.forEach((b) => b.classList.remove('active'));
     btn.classList.add('active');
 
-    // إظهار المشاريع المطابقة وإخفاء الباقي
     projectCards.forEach((card) => {
       const match = type === 'all' || card.dataset.cat === type;
       card.classList.toggle('is-hidden', !match);
-      if (match) card.classList.add('show'); // نتأكد إنها ظاهرة بعد الفلترة
+      if (match) card.classList.add('show');
     });
   });
 });
@@ -66,7 +61,6 @@ const quoteForm = document.getElementById('quoteForm');
 const serviceSelect = document.getElementById('serviceType');
 const sendEmailBtn = document.getElementById('sendEmailBtn');
 
-// تحديد الخدمة تلقائياً إذا جاء الزائر من رابط مثل contact.html?service=insulation
 if (serviceSelect) {
   const urlParams = new URLSearchParams(window.location.search);
   const serviceParam = urlParams.get('service');
@@ -78,7 +72,6 @@ if (serviceSelect) {
   }
 }
 
-// دالة تجميع وتنسيق بيانات النموذج
 function buildQuoteMessage() {
   const name = document.getElementById('clientName').value.trim();
   const phone = document.getElementById('clientPhone').value.trim();
@@ -98,7 +91,6 @@ function buildQuoteMessage() {
   return msg;
 }
 
-// الإرسال عبر واتساب
 if (quoteForm) {
   quoteForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -107,7 +99,6 @@ if (quoteForm) {
   });
 }
 
-// الإرسال عبر البريد الإلكتروني
 if (sendEmailBtn && quoteForm) {
   sendEmailBtn.addEventListener('click', () => {
     if (!quoteForm.reportValidity()) return;
@@ -116,8 +107,6 @@ if (sendEmailBtn && quoteForm) {
     window.location.href = `mailto:elsmmakforcontracting@gmail.com?subject=${subject}&body=${body}`;
   });
 }
-
-const revealItems = document.querySelectorAll(
   '.hero > *, .stats, .services-title, .card, .clients h2, .client-list li, ' +
   '.about-text, .about-numbers, .iso-section h2, .iso-card, .cta-band, .footer-grid > div, ' +
   '.svc-card, .method h2, .step, .project-card, .certs h2, .cert-badge, ' +
